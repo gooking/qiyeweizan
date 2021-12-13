@@ -1,0 +1,11 @@
+<van-empty wx:if="{{!cmsPageDetail}}" description="请在后台添加内容" />
+<view wx:else class="content">
+  <parser html="{{cmsPageDetail.info.contentHtml}}" />
+</view>
+<view wx:if="{{ qrcode }}">
+  <image class="qrcode" src="{{ qrcode }}" mode="widthFix"></image>
+  <view class="qrcode-txt">微信扫一扫快速保存</view>
+</view>
+<view wx:if="{{ cmsPageDetail.info.type == 1 }}" class="float-btn111">
+  <van-button type="primary" block bind:click="copy">一键复制</van-button>
+</view>

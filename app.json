@@ -1,0 +1,119 @@
+{
+  "pages": [    
+    "pages/index/index",
+    "pages/webview/website",
+    "pages/notice/show",
+    "pages/yewu/index",
+    "pages/goods-details/index",
+    "pages/to-pay-order/index",
+    "pages/select-address/index",
+    "pages/address-add/index",
+    "pages/my/index",
+    "pages/maidan/index",
+    "pages/coupons/index",
+    "pages/coupons/merge",
+    "pages/invoice/list",
+    "pages/invoice/apply",
+    "pages/live/index",
+    "pages/help/detail",
+    "pages/help/index",
+    "pages/about/index",
+    "pages/my/feedback",
+    "pages/2b/submit",
+    "pages/wifi/index",
+    "pages/queue/index"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序一键导航到店"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#375282",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/nav/home-off.png",
+        "selectedIconPath": "images/nav/home-on.png",
+        "text": "简介"
+      },
+      {
+        "pagePath": "pages/yewu/index",
+        "iconPath": "images/nav/yewu-off.png",
+        "selectedIconPath": "images/nav/yewu-on.png",
+        "text": "业务"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "iconPath": "images/nav/sw-off.png",
+        "selectedIconPath": "images/nav/sw-on.png",
+        "text": "服务"
+      }
+    ]
+  },
+  "plugins": {
+    "materialPlugin": {
+      "version": "1.0.5",
+      "provider": "wx4d2deeab3aed6e5a"
+    },
+    "contactPlugin": {
+      "version": "1.4.3",
+      "provider": "wx104a1a20c3f81ec2"
+    }
+  },
+  "usingComponents": {
+    "cell-kefu": "plugin://contactPlugin/cell",
+    "cell-qun": "plugin://materialPlugin/cell",
+    "parser":"/components/parser.20200414.min/parser",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-card": "@vant/weapp/card/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-sidebar": "@vant/weapp/sidebar/index",
+    "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-goods-action": "@vant/weapp/goods-action/index",
+    "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
+    "van-goods-action-button": "@vant/weapp/goods-action-button/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-switch": "@vant/weapp/switch/index",
+    "van-rate": "@vant/weapp/rate/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-area": "@vant/weapp/area/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

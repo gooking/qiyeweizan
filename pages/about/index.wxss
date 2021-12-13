@@ -1,0 +1,25 @@
+.content {
+  padding: 32rpx;
+  color: #333;
+  line-height: 64rpx;
+}
+page {
+  padding-bottom: 88rpx;
+}
+.float-btn111 {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+}
+.qrcode {
+  width: 400rpx;
+  margin-top: 64rpx;
+  margin-left: 175rpx;
+  margin-bottom: 32rpx; 
+}
+.qrcode-txt {
+  text-align: center;
+  color:#999;
+  font-size: 24rpx;
+}

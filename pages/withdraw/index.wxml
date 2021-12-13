@@ -1,0 +1,19 @@
+<van-cell title="可用余额" value="{{ balance }}" />
+<van-field
+  label="提现金额"
+  type="digit"
+  model:value="{{ amount }}"
+  placeholder="请输入本次提现金额"
+  clearable
+/>
+<van-field
+  wx:if="{{ balance_pay_pwd }}"
+  label="交易密码"
+  password
+  model:value="{{ pwd }}"
+  placeholder="请输入交易密码"
+  clearable
+/>
+<view class="block-btn btn">
+  <van-button type="primary" block bind:click="bindSave">申请提现</van-button>
+</view>

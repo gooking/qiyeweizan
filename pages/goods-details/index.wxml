@@ -1,0 +1,78 @@
+<view class="container">
+  <view class="swiper-container" id="swiper-container">
+    <swiper class="swiper_box" indicator-dots="true" indicator-active-color="#fff" autoplay circular>
+      <swiper-item wx:for="{{goodsDetail.pics}}" wx:key="id">
+        <image src="{{item.pic}}" class="slide-image" mode="aspectFill" lazy-load="true" />
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="goods-info">
+    <view wx:if="{{ goodsDetail.basicInfo.stores > 0 }}" class="goods-info-top-container">
+      <view class="goods-profile">
+        <view class="p"><text>¥</text> {{selectSizePrice}}</view>
+        <view wx:if="{{goodsDetail.basicInfo.originalPrice && goodsDetail.basicInfo.originalPrice > 0}}"
+          class="goods-price" style='color:#aaa;text-decoration:line-through;padding: 15rpx 0rpx 0rpx 15rpx;'>
+          <text>¥</text> {{selectSizeOPrice}}
+        </view>
+      </view>
+    </view>
+    <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
+    <view class="characteristic">{{goodsDetail.basicInfo.characteristic}}</view>
+  </view>
+  <van-cell wx:if="{{hasMoreSelect}}" custom-class="vw100 goods-property-container"
+    border="{{false}}" is-link bind:click="bindGuiGeTap">
+    <view slot="title">
+      请选择:
+      <block wx:for="{{goodsDetail.properties}}" wx:key="id"> {{item.name}}</block>
+      <block wx:for="{{goodsAddition}}" wx:key="id"> {{item.name}}</block>
+    </view>
+  </van-cell>
+  <view class="goods-des-info" id="goods-des-info">
+    <view class="label-title">
+      <view class="left">商品详情</view>
+    </view>
+    <view class="goods-text">
+      <parser html="{{goodsDetail.content}}" />
+    </view>
+  </view>
+  <van-goods-action wx:if="{{ goodsDetail.basicInfo.stores > 0 }}">
+    <van-goods-action-button text="立即购买" data-shopType="{{shopType}}"
+      bind:click="tobuy" />
+  </van-goods-action>
+</view>
+
+<van-popup show="{{ !hideShopPopup }}" round closeable position="bottom"
+  custom-style="padding-top:48rpx;max-height: 80%;" bind:close="closePopupTap">
+  <van-card centered price="{{ selectSizePrice }}"
+    origin-price="{{ selectSizePrice != selectSizePrice ? selectSizeOPrice : '' }}"
+    title="{{ goodsDetail.basicInfo.name }}" thumb="{{ skuGoodsPic }}" />
+  <view class="size-label-box">
+    <block wx:for="{{goodsDetail.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+      <view class="label">{{property.name}}</view>
+      <view class="label-item-box">
+        <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}"
+          hidden="{{ item.hidden }}" wx:key="id" bindtap="labelItemTap" data-propertyindex="{{idx}}"
+          data-propertychildindex="{{index}}">
+          {{item.name}}
+        </view>
+      </view>
+    </block>
+    <block wx:for="{{goodsAddition}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+      <view class="label">{{property.name}}</view>
+      <view class="label-item-box">
+        <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.items}}" wx:key="id"
+          bindtap="labelItemTap2" data-propertyindex="{{idx}}" data-propertychildindex="{{index}}">
+          {{item.name}}
+        </view>
+      </view>
+    </block>
+  </view>
+  <van-cell title="购买数量">
+    <view>
+      <van-stepper value="{{ buyNumber }}" min="{{ buyNumMin }}" max="{{ buyNumMax }}" bind:change="stepChange" />
+    </view>
+  </van-cell>
+  <van-button wx:if="{{shopType =='addShopCar'}}" bindtap="addShopCar" type="danger" block>加入购物车</van-button>
+  <van-button wx:if="{{shopType =='tobuy' || shopType =='toPingtuan'}}" data-shopType="{{shopType}}" bindtap="buyNow"
+    type="danger" block>立即购买</van-button>
+</van-popup>

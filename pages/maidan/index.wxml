@@ -1,0 +1,16 @@
+<van-field
+  label="金额"
+  type="digit"
+  model:value="{{ amount }}"
+  placeholder="请输入本次付款金额"
+  clearable
+/>
+<van-field
+  label="备注"
+  model:value="{{ remark }}"
+  placeholder="付款说明"
+  clearable
+/>
+<view class="block-btn btn">
+  <van-button type="primary" block bind:click="bindSave">确认支付</van-button>
+</view>

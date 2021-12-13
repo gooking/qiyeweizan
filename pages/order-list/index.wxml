@@ -1,0 +1,50 @@
+<van-tabs wx:if='{{!hasRefund}}' active="{{ tabIndex }}" bind:change="statusTap">
+  <van-tab wx:for="{{statusType}}" wx:key="index" title="{{item.label}}" info="{{badges[index] ? badges[index] : ''}}" />
+</van-tabs>
+<view class="container">
+  <van-empty wx:if="{{ !orderList }}" description="暂无订单" />
+  <view class="order-list" hidden="{{orderList ? false : true}}">
+    <view class="a-order" wx:for="{{orderList}}" wx:key="index">
+      <van-cell title="{{item.orderNumber}}" value="{{item.statusStr}}" is-link url="/pages/order-details/index?id={{item.id}}" />
+      <wxs module="goodsDetailPage">
+      module.exports = {
+        url : function(item) {
+          if (item.supplyType == 'cps_jd') {
+            return '/packageCps/pages/goods-details/cps-jd?id=' + item.goodsId
+          } else if (item.supplyType == 'vop_jd') {
+            return '/pages/goods-details/vop?id=' + item.yyId + '&goodsId=' + item.id
+          } else if (item.supplyType == 'cps_pdd') {
+            return '/packageCps/pages/goods-details/cps-pdd?id=' + item.goodsId
+          } else if (item.supplyType == 'cps_taobao') {
+            return '/packageCps/pages/goods-details/cps-taobao?id=' + item.goodsId
+          } else {
+            return '/pages/goods-details/index?id=' + item.goodsId
+          }
+        }
+      }
+      </wxs>
+      <scroll-view class="goods-img-container" scroll-x="true">
+        <view class="img-box" wx:for="{{goodsMap[item.id]}}" wx:key="index">
+          <navigator url="{{ goodsDetailPage.url(item) }}"><image src="{{item.pic}}" class="goods-img"></image></navigator>
+        </view>
+      </scroll-view>
+      <view class="goods-price">
+        共 {{item.goodsNumber}} 件商品 合计：
+        <text class="p" wx:if="{{item.score <= 0}}">¥ {{item.amountReal}}</text>
+        <text class="p" wx:if="{{item.score > 0}}">¥ {{item.amountReal}} + {{item.score}} 积分</text>
+      </view>
+      <view class="goods-info">
+        <view class="goods-des">
+          <view class="remark" wx:if="{{item.remark && item.remark != ''}}">{{item.remark}}</view>
+          <view>{{item.dateAdd}} </view>
+        </view>
+      </view>
+      <view class="price-box">
+        <view class="btn" hidden="{{item.status==0? false : true}}" bindtap="cancelOrderTap" data-id="{{item.id}}">取消订单</view>
+        <view class="btn active" hidden="{{item.status==0? false : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}" data-score="{{item.score}}">马上付款</view>
+        <view class="btn active" hidden="{{(item.status==0 || item.status==-1) ? true : false}}" bindtap="refundApply" data-id="{{item.id}}" data-amount='{{item.amountReal}}'>退换货</view>
+      </view>
+    </view>
+  </view>
+  <view class="safeAreaOldMarginBttom safeAreaNewMarginBttom"></view>
+</view>

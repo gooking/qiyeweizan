@@ -1,0 +1,29 @@
+<view class="header-box">
+  <open-data class="avatar" type="userAvatarUrl"></open-data>
+  <view class="r">
+    <view class="uid">用户ID: {{ uid }}</view>
+    <view class="nick"><open-data type="userNickName" lang="zh_CN"></open-data></view>
+  </view>
+</view>
+<van-grid column-num="3" clickable>
+  <van-grid-item wx:if="{{ wifi }}" icon="bar-chart-o" text="连接Wi-Fi" url="/pages/wifi/index" />
+  <van-grid-item wx:if="{{ subDomain == '2byewu' }}" icon="records" text="提交受理材料" url="/pages/2b/submit" />
+  <!-- <van-grid-item use-slot text="在线客服">
+    <view class="kefu">
+      <van-icon name="chat-o" size="26px" />
+      <view class="txt">在线客服</view>
+      <button open-type='contact'></button>
+    </view>
+  </van-grid-item> -->
+  <van-grid-item icon="comment-circle-o" text="留言/反馈" url="/pages/my/feedback" />
+  <van-grid-item icon="cashier-o" text="在线付款" url="/pages/maidan/index" />
+  <van-grid-item icon="balance-pay" text="开票信息" url="/pages/about/index?key=invoice" />
+  <van-grid-item icon="cash-back-record" text="申请开票" url="/pages/invoice/apply" />
+  <van-grid-item icon="bullhorn-o" text="在线取号" url="/pages/queue/index" />
+  <!-- <van-grid-item icon="photo-o" text="会员卡" /> -->
+</van-grid>
+<view class="space van-hairline--bottom"></view>
+<van-cell title="清除缓存" is-link bind:click="clearStorage" />
+<van-cell title="当前版本" value="{{version}}" />
+<view wx:if="{{ subDomain == '2byewu' }}" class="jishuzhichi">api工厂提供技术支持</view>
+<view wx:if="{{ subDomain != '2byewu' }}" class="jishuzhichi xiahuaxian" bindtap="yuxinkeji">我也要做小程序</view>

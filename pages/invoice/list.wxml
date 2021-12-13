@@ -1,0 +1,14 @@
+<van-empty wx:if="{{invoiceList.length <= 0}}" description="暂无开票信息" />
+<van-cell-group wx:for="{{invoiceList}}" wx:key="*this" title="{{ item.comName }}">
+  <van-cell title="金额" value="￥{{ item.amount }}" />
+  <van-cell title="状态">
+    <view slot="">
+      <van-tag wx:if="{{item.status == 0}}" type="primary">待处理</van-tag>
+      <van-tag wx:if="{{item.status == 1}}" type="danger">不通过</van-tag>
+      <van-tag wx:if="{{item.status == 2}}" type="warning">开票中</van-tag>
+      <van-tag wx:if="{{item.status == 3}}" type="success">已开票</van-tag>
+    </view>
+  </van-cell>  
+  <van-cell title="申请日期" value="{{ item.dateAdd }}" />
+  <van-cell wx:if="{{item.file}}" title="查看" value="打开电子发票" is-link data-file="{{item.file}}" bind:click="download" />
+</van-cell-group>

@@ -1,0 +1,52 @@
+<van-cell title="企业logo" value="将作为小程序头像" is-link bind:click="uploadLogo" />
+<van-cell title="营业执照" value="选择上传" is-link bind:click="uploadEnterprise" />
+<van-cell title="法人身份证正面" value="选择上传" is-link bind:click="uploadIdcard1" />
+<van-cell title="法人身份证背面" value="选择上传" is-link bind:click="uploadIdcard2" />
+<van-field
+  label="企业名称"
+  model:value="{{ enterprise_name }}"
+  placeholder="营业执照上的企业名称"
+  clearable
+/>
+<van-field
+  label="企业代码"
+  model:value="{{ reg_num }}"
+  placeholder="营业执照上的18位的统一社会信用代码"
+  clearable
+/>
+<van-field
+  label="法人姓名"
+  model:value="{{ legal_representative }}"
+  placeholder="营业执照上的法人姓名"
+  clearable
+/>
+<van-field
+  label="联系电话"
+  type="number"
+  model:value="{{ mobile }}"
+  placeholder="填写您的联系电话"
+  clearable
+/>
+<van-field
+  label="法人微信号"
+  model:value="{{ wx }}"
+  placeholder="填写法人的微信号"
+  clearable
+/>
+<van-field
+  label="小程序名称"
+  model:value="{{ wxappName }}"
+  placeholder="小程序名称，确定后无法修改"
+  clearable
+/>
+<van-field
+  label="开户银行信息"
+  model:value="{{ bankInfo }}"
+  placeholder="企业填对公户，个体户填法人银行卡"
+  clearable
+/>
+<van-cell label="请填写开户银行、所在城市、支行、银行账号信息" />
+
+<view class="block-btn btn">
+  <van-button type="primary" block bind:click="bindSave">提交材料</van-button>
+</view>

@@ -1,0 +1,6 @@
+.block-btn {
+  padding: 32rpx;
+}
+.btn {
+  margin-top: 32rpx;
+}

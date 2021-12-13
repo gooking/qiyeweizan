@@ -1,0 +1,59 @@
+<view class="swiper-container">
+  <swiper class="swiper1" indicator-dots="true" indicator-active-color="#fff" autoplay circular>
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <image mode="aspectFill" bindtap="tapBanner" data-url="{{item.linkUrl}}" src="{{item.picUrl}}" />
+    </swiper-item>
+  </swiper>
+  <view wx:if="{{ usersDynamicList }}" class="goodsDynamic">
+    <swiper class="swiper2" autoplay circular vertical>
+      <navigator wx:for="{{usersDynamicList}}" wx:key="index" url="{{ goodsDetailPage.url(item) }}">
+        <swiper-item>
+          <view class="goodsDynamic-item">
+            <image mode="aspectFill" src="{{item.avatarUrl}}"></image>
+            <text>{{item.nick}} 来过</text>
+          </view>
+        </swiper-item>
+      </navigator>
+    </swiper>
+  </view>
+</view>
+<view class="com-name">
+  <view class="l">{{ comName }}</view>
+  <view class="r">{{ siteStatisticsData.statistics.users }}位朋友来过</view>
+</view>
+<van-cell wx:if="{{ website_0 }}" title="官网" value="{{ website_0 }}" is-link bind:click="copy" data-v="{{ website_0 }}" />
+<van-cell wx:if="{{ website_1 }}" title="官网" value="{{ website_1 }}" is-link bind:click="webview" data-v="{{ website_1 }}" />
+<view wx:if="{{ plugid && url }}" class="contact">
+  <view wx:if="{{ plugid }}" class="item">
+    <cell-kefu plugid='{{ plugid }}'  />
+  </view>
+  <view wx:if="{{ url }}" class="item">
+    <cell-qun contactText="加入微信群" contactTextBlod="{{ false }}" iconBorderRadius="{{ 5 }}" url='{{ url }}'  />
+  </view>
+</view>
+
+<van-cell-group wx:for="{{ shops }}" wx:key="id" title="{{ item.name }}">
+  <van-cell icon="location-o" title="{{ item.address }}" is-link data-idx="{{ index }}" bind:click="gomap" />
+  <van-cell icon="phone-o" title="{{ item.linkPhone }}" is-link data-idx="{{ index }}" bind:click="callMobile" />
+</van-cell-group>
+<view class="notice-box" wx:if="{{noticeList}}">
+  <swiper class="notice_swiper" vertical autoplay circular interval="8000">
+    <swiper-item wx:for="{{noticeList.dataList}}" wx:key="id">
+      <van-notice-bar wx:if="{{noticeList}}" mode="link" text="{{ item.title }}" background="#FFFFFF"
+        data-id="{{ item.id }}" speed="30" bind:click="goNotice">
+        <image slot="left-icon" class="notice-icon" src="../../images/home/notice.png"></image>
+      </van-notice-bar>
+    </swiper-item>
+  </swiper>
+</view>
+<view wx:if="{{ aboutData }}" class="content">
+  <parser html="{{aboutData.info.content}}" />
+</view>
+
+<van-dialog id="van-dialog" show-cancel-button bind:getphonenumber="getPhoneNumber" />
+<van-popup show="{{ showpoplogin }}" bind:close="onClose" custom-class="pop-login" round close-on-click-overlay="{{ false }}">
+  <view class="a">茫茫人海中</view>
+  <view class="b">终于让我遇见你~</view>
+  <view class="c">暖心的祝福问候送给你，请笑纳~</view>
+  <van-button custom-class="d" color="linear-gradient(to right, #ff6034, #ee0a24)" round block size="normal" bind:click="updateUserInfo">收下</van-button>
+</van-popup>
