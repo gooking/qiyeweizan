@@ -95,7 +95,7 @@ module.exports =
 /* eslint-disable */
 // 小程序开发api接口工具包，https://github.com/gooking/wxapi
 var API_BASE_URL = 'https://api.it120.cc';
-// var API_BASE_URL = 'http://127.0.0.1:8081';
+// var API_BASE_URL = 'http://192.168.50.41:8081';
 var subDomain = '-';
 var merchantId = '0';
 
@@ -649,11 +649,9 @@ module.exports = {
       token: token, encryptedData: encryptedData, iv: iv, pwd: pwd
     });
   },
-  bindMobileWxapp: function bindMobileWxapp(token, code, encryptedData, iv) {
-    var pwd = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
-
-    return request('/user/wxapp/bindMobile', true, 'post', {
-      token: token, code: code, encryptedData: encryptedData, iv: iv, pwd: pwd
+  bindMobileWxappV2: function bindMobileWxappV2(token, code, pwd = '') {
+    return request('/user/wxapp/bindMobile/v2', true, 'post', {
+      token: token, code: code, pwd: pwd
     });
   },
   bindMobileTta: function bindMobileTta(token, encryptedData, iv) {
@@ -1512,8 +1510,8 @@ module.exports = {
   wxappServiceAuthorize: function wxappServiceAuthorize(data) {
     return request('/user/wxappService/authorize', true, 'post', data);
   },
-  wxappServiceBindMobile: function wxappServiceBindMobile(data) {
-    return request('/user/wxappService/bindMobile', true, 'post', data);
+  wxappServiceBindMobileV2: function wxappServiceBindMobileV2(data) {
+    return request('/user/wxappService/bindMobile/v2', true, 'post', data);
   },
   wxappServiceBindOpenid: function wxappServiceBindOpenid(data) {
     return request('/user/wxappService/bindOpenid', true, 'post', data);
