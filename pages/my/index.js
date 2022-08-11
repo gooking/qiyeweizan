@@ -19,6 +19,10 @@ Page({
     })
   },
   readConfigVal() {
+    const mallName = wx.getStorageSync('mallName')
+    if (!mallName) {
+      return
+    }
     let subDomain = wx.getExtConfigSync().subDomain
     if (!subDomain) {
       subDomain = CONFIG.subDomain
@@ -29,6 +33,9 @@ Page({
       version: CONFIG.version,
       uid: wx.getStorageSync('uid'),
       wifi: wx.getStorageSync('wifi'),
+      online_pay: wx.getStorageSync('online_pay'),
+      quhao: wx.getStorageSync('quhao'),
+      show_copyright: wx.getStorageSync('show_copyright'),
     })
   },
   onShareAppMessage: function() {    

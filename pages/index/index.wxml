@@ -23,7 +23,7 @@
 </view>
 <van-cell wx:if="{{ website_0 }}" title="官网" value="{{ website_0 }}" is-link bind:click="copy" data-v="{{ website_0 }}" />
 <van-cell wx:if="{{ website_1 }}" title="官网" value="{{ website_1 }}" is-link bind:click="webview" data-v="{{ website_1 }}" />
-<view wx:if="{{ plugid && url }}" class="contact">
+<view wx:if="{{ qiyeweixin_open == '1' && plugid && url }}" class="contact">
   <view wx:if="{{ plugid }}" class="item">
     <cell-kefu plugid='{{ plugid }}'  />
   </view>

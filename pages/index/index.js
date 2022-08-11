@@ -37,8 +37,12 @@ Page({
   onShow: function(e){
   },
   readConfigVal() {
+    const mallName = wx.getStorageSync('mallName')
+    if (!mallName) {
+      return
+    }
     wx.setNavigationBarTitle({
-      title: wx.getStorageSync('mallName'),
+      title: mallName,
     })
     this.setData({
       comName: wx.getStorageSync('comName'),
@@ -46,6 +50,7 @@ Page({
       website_1: wx.getStorageSync('website_1'),
       plugid: wx.getStorageSync('plugid'),
       url: wx.getStorageSync('url'),
+      qiyeweixin_open: wx.getStorageSync('qiyeweixin_open'),
     })
   },
   async updateUserInfoAndMobile() {
