@@ -232,6 +232,13 @@
           "pathName": "pages/wifi/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/wifi/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
