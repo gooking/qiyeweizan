@@ -10,6 +10,12 @@
   height: 128rpx;
   overflow: hidden;
   border-radius: 50%;
+  margin: 20rpx;
+}
+.header-box .avatar-img {
+  width: 128rpx;
+  height: 128rpx;
+  margin-left: -30rpx;
 }
 .header-box .btn {
   margin-left: 32rpx;

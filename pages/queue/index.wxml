@@ -1,26 +1,4 @@
-<block wx:if="{{ userBaseInfoStatus == 1 }}">
-  <view class="login-box">
-    <image class="logo" src="/images/wx.jpg" mode="widthFix"></image>
-    <view class="line"></view>
-    <view class="title">申请获取以下权限</view>
-    <view class="profile">获取微信头像、昵称</view>
-    <view class="btn">
-      <van-button type="primary" block round bind:click="login">登陆后在线取号</van-button>
-    </view>
-  </view>
-</block>
-<block wx:if="{{ userBaseInfoStatus == 2 }}">
-  <view class="login-box">
-    <image class="logo" src="/images/wx.jpg" mode="widthFix"></image>
-    <view class="line"></view>
-    <view class="title">申请获取以下权限</view>
-    <view class="profile">获取微信头像、昵称</view>
-    <view class="btn">
-      <van-button type="primary" block round bind:click="updateUserInfo">登陆后在线取号</van-button>
-    </view>
-  </view>
-</block>
-<block wx:if="{{ userBaseInfoStatus == 3 }}">
+<block wx:if="{{ !mobile }}">
   <view class="login-box">
     <image class="logo" src="/images/wx.jpg" mode="widthFix"></image>
     <view class="line"></view>
@@ -31,7 +9,7 @@
     </view>
   </view>
 </block>
-<block wx:if="{{ userBaseInfoStatus == 4 }}">
+<block wx:else>
   <van-empty wx:if="{{!list}}" description="暂无队列" />
   <view class="btn-groups">
     <van-button custom-class="btn" wx:for="{{list}}" wx:key="id" type="primary" block bind:click="queuingGet" data-index="{{ index }}">{{ item.name }} (共 {{item.numberGet}} 号，当前第 {{item.curNumber}} 号)</van-button>

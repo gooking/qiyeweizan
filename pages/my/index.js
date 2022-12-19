@@ -36,6 +36,7 @@ Page({
       online_pay: wx.getStorageSync('online_pay'),
       quhao: wx.getStorageSync('quhao'),
       show_copyright: wx.getStorageSync('show_copyright'),
+      userBaseInfo: getApp().globalData.userBaseInfo
     })
   },
   onShareAppMessage: function() {    
@@ -43,44 +44,6 @@ Page({
       title: '"' + wx.getStorageSync('comName') + '" ' + wx.getStorageSync('share_profile'),
       path: '/pages/index/index?inviter_id=' + wx.getStorageSync('uid')
     }
-  },
-  updateUserInfo(e) {
-    wx.getUserProfile({
-      lang: 'zh_CN',
-      desc: '用于完善会员资料',
-      success: res => {
-        console.log(res);
-        this._updateUserInfo(res.userInfo)
-      },
-      fail: err => {
-        console.log(err);
-        wx.showToast({
-          title: err.errMsg,
-          icon: 'none'
-        })
-      }
-    })
-  },
-  async _updateUserInfo(userInfo) {
-    const postData = {
-      token: wx.getStorageSync('token'),
-      nick: userInfo.nickName,
-      avatarUrl: userInfo.avatarUrl,
-      city: userInfo.city,
-      province: userInfo.province,
-      gender: userInfo.gender,
-    }
-    const res = await WXAPI.modifyUserInfo(postData)
-    if (res.code != 0) {
-      wx.showToast({
-        title: res.msg,
-        icon: 'none'
-      })
-      return
-    }
-    wx.showToast({
-      title: '登陆成功',
-    })
   },
   clearStorage(){
     wx.clearStorageSync()
@@ -94,6 +57,76 @@ Page({
     wx.navigateToMiniProgram({
       appId: 'wx2bdf7b6e21c5049c',
       path: 'pages/index/index?iv_subDomain=' + this.data.subDomain
+    })
+  },
+  kefu() {
+    wx.openCustomerServiceChat({
+        extInfo: {url: wx.getStorageSync('kefu_url')},
+        corpId: wx.getStorageSync('kefu_corpId'),
+        success(res) {}
+    })
+  },
+  editNick() {
+    this.setData({
+      nickShow: true
+    })
+  },
+  async _editNick() {
+    if (!this.data.nick) {
+      wx.showToast({
+        title: '请填写昵称',
+        icon: 'none'
+      })
+      return
+    }
+    const postData = {
+      token: wx.getStorageSync('token'),
+      nick: this.data.nick,
+    }
+    const res = await WXAPI.modifyUserInfo(postData)
+    if (res.code != 0) {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+      return
+    }
+    wx.showToast({
+      title: '设置成功',
+    })
+    await getApp().updateUserInfoAndMobile()
+    this.setData({
+      userBaseInfo: getApp().globalData.userBaseInfo
+    })
+  },
+  async onChooseAvatar(e) {
+    console.log(e);
+    const avatarUrl = e.detail.avatarUrl
+    let res = await WXAPI.uploadFile(wx.getStorageSync('token'), avatarUrl)
+    if (res.code != 0) {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+      return
+    }
+    res = await WXAPI.modifyUserInfo({
+      token: wx.getStorageSync('token'),
+      avatarUrl: res.data.url,
+    })
+    if (res.code != 0) {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+      return
+    }
+    wx.showToast({
+      title: '设置成功',
+    })
+    await getApp().updateUserInfoAndMobile()
+    this.setData({
+      userBaseInfo: getApp().globalData.userBaseInfo
     })
   }
 })

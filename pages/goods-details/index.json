@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "业务介绍",
+  "navigationBarTitleText": "",
   "usingComponents": {
     "poster": "wxa-plugin-canvas/poster"
   }

@@ -2,7 +2,7 @@ const WXAPI = require('apifm-wxapi')
 const AUTH = require('../../utils/auth')
 Page({
   data: {
-    userBaseInfoStatus: 0, // 初始0，1 为未登陆，2 为未授权，3 为未绑定手机号, 4 OK
+    mobile: undefined, // 手机号码
   },
   onLoad: function (options) {
     this.queuingTypes()
@@ -90,62 +90,14 @@ Page({
   async userDetail() {
     const res = await WXAPI.userDetail(wx.getStorageSync('token'))
     if (res.code == 0) {
-      const userBaseInfo = res.data.base
-      let userBaseInfoStatus = 4
-      if (!userBaseInfo.mobile) {
-        userBaseInfoStatus = 3
-      }
-      if (!userBaseInfo.nick && !userBaseInfo.avatarUrl) {
-        userBaseInfoStatus = 2
-      }
       this.setData({
-        userBaseInfo,
-        userBaseInfoStatus
-      })
-    } else {
-      this.setData({
-        userBaseInfoStatus: 1
+        mobile: res.data.base.mobile
       })
     }
   },
   async login() {
     await AUTH.authorize()
     this.queuingMy()
-    this.userDetail()
-  },
-  updateUserInfo() {
-    this.setData({
-      showpoplogin: false
-    })
-    wx.getUserProfile({
-      lang: 'zh_CN',
-      desc: '用于完善会员资料',
-      success: res => {
-        console.log(res);
-        this._updateUserInfo(res.userInfo)
-      },
-      fail: err => {
-        console.error(err)
-      }
-    })
-  },
-  async _updateUserInfo(userInfo) {
-    const postData = {
-      token: wx.getStorageSync('token'),
-      nick: userInfo.nickName,
-      avatarUrl: userInfo.avatarUrl,
-      city: userInfo.city,
-      province: userInfo.province,
-      gender: userInfo.gender,
-    }
-    const res = await WXAPI.modifyUserInfo(postData)
-    if (res.code != 0) {
-      wx.showToast({
-        title: res.msg,
-        icon: 'none'
-      })
-      return
-    }
     this.userDetail()
   },
   async getPhoneNumber(e) {

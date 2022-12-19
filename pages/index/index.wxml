@@ -23,9 +23,11 @@
 </view>
 <van-cell wx:if="{{ website_0 }}" title="官网" value="{{ website_0 }}" is-link bind:click="copy" data-v="{{ website_0 }}" />
 <van-cell wx:if="{{ website_1 }}" title="官网" value="{{ website_1 }}" is-link bind:click="webview" data-v="{{ website_1 }}" />
-<view wx:if="{{ qiyeweixin_open == '1' && plugid && url }}" class="contact">
-  <view wx:if="{{ plugid }}" class="item">
-    <cell-kefu plugid='{{ plugid }}'  />
+<view wx:if="{{ qiyeweixin_open == '1' }}" class="contact">
+  <view wx:if="{{ kefu_url && kefu_corpId }}" class="item item2" bindtap="kefu">
+    <!-- <cell-kefu plugid='{{ plugid }}'  /> -->
+    <van-icon name="chat" color="#2f91f1" size="88rpx" />
+    <text>在线咨询</text>
   </view>
   <view wx:if="{{ url }}" class="item">
     <cell-qun contactText="加入微信群" contactTextBlod="{{ false }}" iconBorderRadius="{{ 5 }}" url='{{ url }}'  />
@@ -51,9 +53,3 @@
 </view>
 
 <van-dialog id="van-dialog" show-cancel-button bind:getphonenumber="getPhoneNumber" />
-<van-popup show="{{ showpoplogin }}" bind:close="onClose" custom-class="pop-login" round close-on-click-overlay="{{ false }}">
-  <view class="a">茫茫人海中</view>
-  <view class="b">终于让我遇见你~</view>
-  <view class="c">暖心的祝福问候送给你，请笑纳~</view>
-  <van-button custom-class="d" color="linear-gradient(to right, #ff6034, #ee0a24)" round block size="normal" bind:click="updateUserInfo">收下</van-button>
-</van-popup>

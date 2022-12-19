@@ -1,20 +1,26 @@
 <view class="header-box">
-  <open-data class="avatar" type="userAvatarUrl"></open-data>
+  <!-- <open-data class="avatar" type="userAvatarUrl"></open-data> -->
+  <button class="avatar" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+    <image class="avatar-img" src="{{ userBaseInfo.avatarUrl ? userBaseInfo.avatarUrl : '/images/default.png' }}" mode="aspectFill"></image>
+  </button>
   <view class="r">
     <view class="uid">用户ID: {{ uid }}</view>
-    <view class="nick"><open-data type="userNickName" lang="zh_CN"></open-data></view>
+    <!-- <view class="nick">
+      <open-data type="userNickName" lang="zh_CN"></open-data>
+    </view> -->
+    <view class="nick" bindtap="editNick">{{ userBaseInfo.nick ? userBaseInfo.nick : '点击设置昵称' }}</view>
   </view>
 </view>
 <van-grid column-num="3" clickable>
   <van-grid-item wx:if="{{ wifi }}" icon="bar-chart-o" text="连接Wi-Fi" url="/pages/wifi/index" />
   <van-grid-item wx:if="{{ subDomain == '2byewu' }}" icon="records" text="提交受理材料" url="/pages/2b/submit" />
-  <!-- <van-grid-item use-slot text="在线客服">
+  <van-grid-item use-slot text="在线客服">
     <view class="kefu">
       <van-icon name="chat-o" size="26px" />
       <view class="txt">在线客服</view>
-      <button open-type='contact'></button>
+      <button bindtap="kefu"></button>
     </view>
-  </van-grid-item> -->
+  </van-grid-item>
   <van-grid-item icon="comment-circle-o" text="留言/反馈" url="/pages/my/feedback" />
   <van-grid-item wx:if="{{ online_pay == '1' }}" icon="cashier-o" text="在线付款" url="/pages/maidan/index" />
   <van-grid-item icon="balance-pay" text="开票信息" url="/pages/about/index?key=invoice" />
@@ -29,3 +35,19 @@
   <view wx:if="{{ subDomain == '2byewu' }}" class="jishuzhichi">api工厂提供技术支持</view>
   <view wx:if="{{ subDomain != '2byewu' }}" class="jishuzhichi xiahuaxian" bindtap="yuxinkeji">我也要做小程序</view>
 </block>
+
+<van-dialog
+  use-slot
+  title="修改昵称"
+  show="{{ nickShow }}"
+  show-cancel-button
+  bind:confirm="_editNick"
+>
+  <van-field
+    model:value="{{ nick }}"
+    type="nickname"
+    placeholder="请输入昵称"
+    size="large"
+    clearable
+  />
+</van-dialog>

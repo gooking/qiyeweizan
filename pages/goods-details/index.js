@@ -65,6 +65,9 @@ Page({
     const that = this;
     const goodsDetailRes = await WXAPI.goodsDetail(goodsId, token ? token : '')
     if (goodsDetailRes.code == 0) {
+      wx.setNavigationBarTitle({
+        title: goodsDetailRes.data.basicInfo.name,
+      })
       if (!goodsDetailRes.data.pics || goodsDetailRes.data.pics.length == 0) {
         goodsDetailRes.data.pics = [{
           pic: goodsDetailRes.data.basicInfo.pic
@@ -432,6 +435,13 @@ Page({
   closePop() {
     this.setData({
       posterShow: false
+    })
+  },
+  kefu() {
+    wx.openCustomerServiceChat({
+        extInfo: {url: wx.getStorageSync('kefu_url')},
+        corpId: wx.getStorageSync('kefu_corpId'),
+        success(res) {}
     })
   },
 })
