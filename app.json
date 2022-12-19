@@ -28,6 +28,10 @@
       "desc": "你的位置信息将用于小程序一键导航到店"
     }
   },
+  "requiredPrivateInfos": [
+    "chooseAddress",
+    "chooseLocation"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -63,11 +67,11 @@
   },
   "plugins": {
     "materialPlugin": {
-      "version": "1.0.5",
+      "version": "1.0.8",
       "provider": "wx4d2deeab3aed6e5a"
     },
     "contactPlugin": {
-      "version": "1.4.3",
+      "version": "1.4.5",
       "provider": "wx104a1a20c3f81ec2"
     }
   },
