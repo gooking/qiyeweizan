@@ -6,14 +6,14 @@
 
 扫码体验：
 
-<img src="https://7.s2m.cc/2021/10/05/a4cee443-cb69-441e-b440-3d436310f206.jpeg" width="200px">
+<img src="https://dcdn.it120.cc/2022/12/31/4ea10b9c-4ed0-4639-a679-0108b1a85d35.jpeg" width="200px">
 
 
 如果觉得本项目对你有帮助，帮忙点下 `star` 哦～
 
-# 微信交流群
+# 联系我
 
-<img src="https://dcdn.it120.cc/2021/12/13/088bbe8e-9740-4158-835c-3e2c7d941b1a.png" width="200px">
+<img src="https://dcdn.it120.cc/2023/10/16/78499895-dbb1-436c-a022-fb4c35438478.png" width="200px">
 
 # 其他优秀开源模板推荐
 - [天使童装](https://github.com/EastWorld/wechat-app-mall) [码云镜像](https://gitee.com/javazj/wechat-app-mall)
